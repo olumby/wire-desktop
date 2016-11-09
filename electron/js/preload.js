@@ -25,7 +25,6 @@ const spellchecker = require('spellchecker');
 const osLocale = require('os-locale');
 
 osLocale(function (err, locale) {
-  console.log(locale);
   webFrame.setSpellCheckProvider(locale, true, {
     spellCheck (text) {
       return !(spellchecker.isMisspelled(text));
