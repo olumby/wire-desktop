@@ -21,6 +21,17 @@
 
 const {ipcRenderer, webFrame, desktopCapturer} = require('electron');
 const pkg = require('./../package.json');
+const spellchecker = require('spellchecker');
+const osLocale = require('os-locale');
+
+osLocale(function (err, locale) {
+  console.log(locale);
+  webFrame.setSpellCheckProvider(locale, true, {
+    spellCheck (text) {
+      return !(spellchecker.isMisspelled(text));
+    }
+  })
+});
 
 webFrame.setZoomLevelLimits(1, 1);
 webFrame.registerURLSchemeAsBypassingCSP('file');
